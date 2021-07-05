@@ -46,4 +46,18 @@ describe('Inference Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('normal_image'))
   })
+
+  test('Should return 400 if no inferred image is provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        normal_image: 'any_normal_image',
+        inference: 'any_inference',
+        created_at: 'any_data'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new MissingParamError('inferred_image'))
+  })
 })
