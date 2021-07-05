@@ -1,4 +1,4 @@
-import { MissingParamError } from '../../errors'
+import { MissingParamError, ServerError } from '../../errors'
 import { InferenceController } from './inference'
 import { AddInference, InferenceModel, AddInferenceModel } from './inference-protocols'
 
@@ -87,6 +87,24 @@ describe('Inference Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('created_at'))
+  })
+
+  test('Should return 500 if AddInferrence throws', async () => {
+    const { sut, addInferenceStub } = makeSut()
+    jest.spyOn(addInferenceStub, 'add').mockImplementationOnce(async () => {
+      return new Promise((resolve, reject) => reject(new Error()))
+    })
+    const httpRequest = {
+      body: {
+        normal_image: 'any_normal_image',
+        inferred_image: 'any_inferred_image',
+        inference: 'any_inference',
+        created_at: 'any_date'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 
   test('Should return 200 if valid data is provided', async () => {
