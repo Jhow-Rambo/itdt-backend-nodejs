@@ -10,7 +10,7 @@ const makeAddInferenceStub = (): AddInference => {
         normal_image: 'valid_normal_image',
         inferred_image: 'valid_inferred_image',
         inference: 'valid_inference',
-        created_at: 'valid_data'
+        created_at: 'valid_date'
       }
       return new Promise(resolve => resolve(fakeInference))
     }
@@ -87,5 +87,26 @@ describe('Inference Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('created_at'))
+  })
+
+  test('Should return 200 if valid data is provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        normal_image: 'any_normal_image',
+        inferred_image: 'any_inferred_image',
+        inference: 'any_inference',
+        created_at: 'any_date'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      normal_image: 'valid_normal_image',
+      inferred_image: 'valid_inferred_image',
+      inference: 'valid_inference',
+      created_at: 'valid_date'
+    })
   })
 })
