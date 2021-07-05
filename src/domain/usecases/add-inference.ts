@@ -1,9 +1,9 @@
 import { InferenceModel } from '../models/inference'
 
 export interface AddInferenceModel {
-  normal_image: string
-  inferred_image: string
-  inference: string // TODO: search about json not string
+  normal_image: any
+  inferred_image: any
+  inference: any // TODO: search about json not string
   created_at: string
 }
 
