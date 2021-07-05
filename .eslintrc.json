@@ -9,6 +9,7 @@
     "@typescript-eslint/method-signature-style": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/new-cap": "off",
     "eol-last": "off"
   }
 }
