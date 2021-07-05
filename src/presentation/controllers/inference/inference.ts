@@ -1,5 +1,5 @@
 import { MissingParamError } from '../../errors'
-import { badRequest } from '../../helpers/http-helper'
+import { badRequest, ok } from '../../helpers/http-helper'
 import { AddInference, Controller, HttpRequest, HttpResponse } from './inference-protocols'
 
 export class InferenceController implements Controller {
@@ -16,5 +16,13 @@ export class InferenceController implements Controller {
         return badRequest(new MissingParamError(field))
       }
     }
+    const { normal_image, inferred_image, inference, created_at } = httpRequest.body
+    const inferenceData = await this.addInference.add({
+      normal_image,
+      inferred_image,
+      inference,
+      created_at
+    })
+    return ok(inferenceData)
   }
 }
