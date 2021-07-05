@@ -62,4 +62,22 @@ describe('DbInference Usecase', () => {
     const promise = sut.add(inferenceData)
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should return an inference on success', async () => {
+    const { sut } = makeSut()
+    const inferenceData = {
+      normal_image: 'valid_normal_image',
+      inferred_image: 'valid_inferred_image',
+      inference: 'valid_inference',
+      created_at: 'valid_date'
+    }
+    const inference = await sut.add(inferenceData)
+    expect(inference).toEqual({
+      id: 'valid_id',
+      normal_image: 'valid_normal_image',
+      inferred_image: 'valid_inferred_image',
+      inference: 'valid_inference',
+      created_at: 'valid_date'
+    })
+  })
 })
