@@ -4,7 +4,7 @@ export interface AddInferenceModel {
   normal_image: string
   inferred_image: string
   inference: JSON
-  created_at: number
+  created_at: string
 }
 
 export interface AddInference {
