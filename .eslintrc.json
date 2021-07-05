@@ -8,6 +8,7 @@
     "@typescript-eslint/return-await": "off",
     "@typescript-eslint/method-signature-style": "off",
     "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/no-misused-promises": "off",
     "eol-last": "off"
   }
 }
