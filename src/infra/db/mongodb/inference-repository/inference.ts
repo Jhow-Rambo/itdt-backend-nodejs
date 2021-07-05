@@ -9,4 +9,9 @@ export class InferenceMongoRepository implements AddInferenceRepository {
     const result = await inferenceCollection.insertOne(inferrenceData)
     return MongoHelper.map(result.ops[0])
   }
+
+  async get (): Promise<any> {
+    const inferences = await MongoHelper.getCollection('inferences').find()
+    return inferences
+  }
 }
