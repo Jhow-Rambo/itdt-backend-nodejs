@@ -7,6 +7,7 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/return-await": "off",
     "@typescript-eslint/method-signature-style": "off",
+    "@typescript-eslint/naming-convention": "off",
     "eol-last": "off"
   }
 }
