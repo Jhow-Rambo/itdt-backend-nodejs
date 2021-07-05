@@ -3,7 +3,7 @@ import { InferenceModel } from '../models/inference'
 export interface AddInferenceModel {
   normal_image: string
   inferred_image: string
-  inference: JSON
+  inference: string // TODO: search about json not string
   created_at: string
 }
 
