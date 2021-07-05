@@ -1,4 +1,4 @@
-import { InferenceMongoRepository } from '../../infra/db/mongodb/account-repository/inference'
+import { InferenceMongoRepository } from '../../infra/db/mongodb/inference-repository/inference'
 import { InferenceController } from '../../presentation/controllers/inference/inference'
 import { DbAddInference } from '../../data/usecases/add-inference/db-add-inference'
 
