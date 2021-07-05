@@ -39,7 +39,7 @@ describe('Inference Controller', () => {
       body: {
         inferred_image: 'any_inferred_image',
         inference: 'any_inference',
-        created_at: 'any_data'
+        created_at: 'any_date'
       }
     }
     const httpResponse = await sut.handle(httpRequest)
@@ -53,7 +53,7 @@ describe('Inference Controller', () => {
       body: {
         normal_image: 'any_normal_image',
         inference: 'any_inference',
-        created_at: 'any_data'
+        created_at: 'any_date'
       }
     }
     const httpResponse = await sut.handle(httpRequest)
@@ -67,11 +67,25 @@ describe('Inference Controller', () => {
       body: {
         normal_image: 'any_normal_image',
         inferred_image: 'any_inferred_image',
-        created_at: 'any_data'
+        created_at: 'any_date'
       }
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('inference'))
+  })
+
+  test('Should return 400 if no date is provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        normal_image: 'any_normal_image',
+        inferred_image: 'any_inferred_image',
+        inference: 'any_inference'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new MissingParamError('created_at'))
   })
 })
