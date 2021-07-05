@@ -49,4 +49,17 @@ describe('DbInference Usecase', () => {
       created_at: 'valid_date'
     })
   })
+
+  test('Should throw if AddInferenceRepository throws', async () => {
+    const { sut, addIferenceRepositoryStub } = makeSut()
+    jest.spyOn(addIferenceRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const inferenceData = {
+      normal_image: 'valid_normal_image',
+      inferred_image: 'valid_inferred_image',
+      inference: 'valid_inference',
+      created_at: 'valid_date'
+    }
+    const promise = sut.add(inferenceData)
+    await expect(promise).rejects.toThrow()
+  })
 })
