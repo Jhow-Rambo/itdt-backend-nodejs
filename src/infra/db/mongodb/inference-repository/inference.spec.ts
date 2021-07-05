@@ -1,8 +1,13 @@
 import { MongoHelper } from '../helpers/mongo-helper'
-import { InferenceMongoRepository } from './inference'
+import { GetInferenceMongoRepository, InferenceMongoRepository } from './inference'
 
-const makeSut = (): InferenceMongoRepository => {
-  return new InferenceMongoRepository()
+const makeSut = (): any => {
+  const sut = new InferenceMongoRepository()
+  const sutGetMethod = new GetInferenceMongoRepository()
+  return {
+    sut,
+    sutGetMethod
+  }
 }
 
 describe('Inference Mongo Repository', () => {
@@ -20,7 +25,7 @@ describe('Inference Mongo Repository', () => {
   })
 
   test('Sould return an inference on success', async () => {
-    const sut = makeSut()
+    const { sut } = makeSut()
     const inference = await sut.add({
       normal_image: 'valid_normal_image',
       inferred_image: 'valid_inferred_image',
@@ -36,8 +41,8 @@ describe('Inference Mongo Repository', () => {
   })
 
   test('Sould return inferences os success', async () => {
-    const sut = makeSut()
-    const inferences = await sut.get()
+    const { sutGetMethod } = makeSut()
+    const inferences = await sutGetMethod.get()
     expect(inferences).toBeTruthy()
   })
 })
