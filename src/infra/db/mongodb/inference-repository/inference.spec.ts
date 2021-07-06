@@ -37,10 +37,4 @@ describe('Inference Mongo Repository', () => {
     expect(inference.inference).toBe('valid_inference')
     expect(inference.created_at).toBe('valid_date')
   })
-
-  test('Sould return inferences os success', async () => {
-    const { sutGetMethod } = makeSut()
-    const inferences = await sutGetMethod.get()
-    expect(inferences).toBeTruthy()
-  })
 })
