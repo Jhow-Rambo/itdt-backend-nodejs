@@ -1,12 +1,10 @@
 import { MongoHelper } from '../helpers/mongo-helper'
-import { GetInferenceMongoRepository, InferenceMongoRepository } from './inference'
+import { InferenceMongoRepository } from './inference'
 
 const makeSut = (): any => {
   const sut = new InferenceMongoRepository()
-  const sutGetMethod = new GetInferenceMongoRepository()
   return {
-    sut,
-    sutGetMethod
+    sut
   }
 }
 

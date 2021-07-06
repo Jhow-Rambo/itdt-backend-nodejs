@@ -10,10 +10,3 @@ export class InferenceMongoRepository implements AddInferenceRepository {
     return MongoHelper.map(result.ops[0])
   }
 }
-
-export class GetInferenceMongoRepository {
-  async get (): Promise<any> {
-    const inferences = await MongoHelper.getCollection('inferences').find()
-    return inferences
-  }
-}
