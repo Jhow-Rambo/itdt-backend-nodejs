@@ -1,6 +1,6 @@
 import { MissingParamError } from '../../errors'
 import { badRequest, ok, serverError } from '../../helpers/http-helper'
-import { AddInference, Controller, HttpRequest, HttpResponse, InferenceGet } from './inference-protocols'
+import { AddInference, Controller, HttpRequest, HttpResponse } from './inference-protocols'
 
 export class InferenceController implements Controller {
   private readonly addInference: AddInference
@@ -24,18 +24,6 @@ export class InferenceController implements Controller {
         inference,
         created_at
       })
-      return ok(inferenceData)
-    } catch (error) {
-      console.error(error)
-      return serverError()
-    }
-  }
-}
-
-export class GetInferenceController implements InferenceGet {
-  async get (inference: any): Promise<HttpResponse> {
-    try {
-      const inferenceData = inference
       return ok(inferenceData)
     } catch (error) {
       console.error(error)

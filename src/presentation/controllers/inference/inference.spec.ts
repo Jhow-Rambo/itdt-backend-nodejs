@@ -1,5 +1,5 @@
 import { MissingParamError, ServerError } from '../../errors'
-import { GetInferenceController, InferenceController } from './inference'
+import { InferenceController } from './inference'
 import { AddInference, InferenceModel, AddInferenceModel } from './inference-protocols'
 
 const makeAddInferenceStub = (): AddInference => {
@@ -20,18 +20,15 @@ const makeAddInferenceStub = (): AddInference => {
 
 interface SutTypes {
   sut: InferenceController
-  getSut: GetInferenceController
   addInferenceStub: AddInference
 }
 
 const makeSut = (): SutTypes => {
   const addInferenceStub = makeAddInferenceStub()
   const sut = new InferenceController(addInferenceStub)
-  const getSut = new GetInferenceController()
   return {
     sut,
-    addInferenceStub,
-    getSut
+    addInferenceStub
   }
 }
 
@@ -129,14 +126,5 @@ describe('Inference Controller', () => {
       inference: 'valid_inference',
       created_at: 'valid_date'
     })
-  })
-
-  // TODO: make a test for 'Should return 500 if GetInferenceController throws'
-  test('Should return 200 if valid inference is provided', async () => {
-    const { getSut } = makeSut()
-    const inferences = ['any_inference']
-    const httpResponse = await getSut.get(inferences)
-    expect(httpResponse.statusCode).toBe(200)
-    expect(httpResponse.body).toEqual(inferences)
   })
 })

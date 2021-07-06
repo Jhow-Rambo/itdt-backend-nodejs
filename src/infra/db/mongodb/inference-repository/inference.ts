@@ -7,13 +7,17 @@ export class InferenceMongoRepository implements AddInferenceRepository {
   async add (inferrenceData: AddInferenceModel): Promise<InferenceModel> {
     const inferenceCollection = await MongoHelper.getCollection('inferences')
     const result = await inferenceCollection.insertOne(inferrenceData)
-
-    const inferences = await MongoHelper.getCollection('inferences')
-    await inferences.find({}).toArray(function (err, result) {
-      if (err) throw err
-      console.log(result)
-    })
-
     return MongoHelper.map(result.ops[0])
+  }
+}
+
+export class GetInferenceMongoRepository {
+  async handle (): Promise<any> {
+    const inferences = await MongoHelper.getCollection('inferences')
+    const result = await inferences.find({}).toArray()
+    return {
+      statusCode: 200,
+      body: result
+    }
   }
 }
