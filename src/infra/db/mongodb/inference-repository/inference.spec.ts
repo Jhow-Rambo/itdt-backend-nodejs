@@ -14,7 +14,7 @@ describe('Inference Mongo Repository', () => {
   })
 
   beforeEach(async () => {
-    const inferenceCollection = MongoHelper.getCollection('inferences')
+    const inferenceCollection = await MongoHelper.getCollection('inferences')
     await inferenceCollection.deleteMany({})
   })
 
