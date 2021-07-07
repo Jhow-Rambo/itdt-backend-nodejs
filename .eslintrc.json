@@ -10,6 +10,7 @@
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/new-cap": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
     "eol-last": "off"
   }
 }
